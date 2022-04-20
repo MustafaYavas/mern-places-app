@@ -1,5 +1,5 @@
 import UserItem from './UserItem';
-// import styles from './UsersList.module.css';
+import styles from './UsersList.module.css';
 
 const UsersList = (props) => {
     return (
@@ -8,7 +8,7 @@ const UsersList = (props) => {
 
             {
                 props.items.length>0 && 
-                <ul className='users-list'>
+                <ul className={styles['users-list']}>
                     {
                         props.items.map((user) => {
                             return (
