@@ -1,6 +1,8 @@
-import HttpError from '../models/http-error.js';
 import { v4 as uuidv4 } from 'uuid';
 import { validationResult } from 'express-validator';
+
+import HttpError from '../models/http-error.js';
+import getCoordsForAddress from '../util/location.js';
 
 let DUMMY_PLACES = [
     {
@@ -40,13 +42,21 @@ const getPlacesByUserId = (req, res, next) => {
     res.json({places})
 }
 
-const createPlace = (req, res, nex) => {
+const createPlace = async (req, res, next) => {
     const errors = validationResult(req);  // this runs validation middleware function 
     if (!errors.isEmpty()) {
-        throw new HttpError('Invalid input passed, please check your data', 422);
+        return next(new HttpError('Invalid input passed, please check your data', 422));
     }
 
-    const { title, description, coordinates, address, creator } = req.body;
+    const { title, description, address, creator } = req.body;
+
+    let coordinates;
+    try {
+        coordinates = await getCoordsForAddress(address)
+    } catch (error) {
+        return next(error)
+    }
+    
 
     const createdPlace = {
         id: uuidv4(),
