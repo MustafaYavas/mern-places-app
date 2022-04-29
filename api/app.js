@@ -1,7 +1,7 @@
 import express from 'express';
 
 import placesRoutes from './routes/places-routes.js';  // it is kind of a middleware, so we can use it with app.use()
-// import usersRoutes from './routes/users-routes.js';
+import usersRoutes from './routes/users-routes.js';
 import HttpError from './models/http-error.js';
 
 const app = express();
@@ -10,7 +10,7 @@ const port = process.env.PORT || 3000;
 app.use(express.json());
 
 app.use('/api/places' ,placesRoutes);   // => localhost:3000/api/places/...
-// app.use('/api/users' ,usersRoutes);   // => localhost:3000/api/users/...
+app.use('/api/users' ,usersRoutes);   // => localhost:3000/api/users/...
 
 
 // if it doesn't match any route
