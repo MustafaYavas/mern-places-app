@@ -1,4 +1,5 @@
 import express from 'express';
+import mongoose from 'mongoose';
 
 import placesRoutes from './routes/places-routes.js';  // it is kind of a middleware, so we can use it with app.use()
 import usersRoutes from './routes/users-routes.js';
@@ -31,6 +32,12 @@ app.use((error, req, res, next) => {
     })
 })
 
-app.listen(port, () => {
-  console.log(`Server is up on port ${port}`)
+mongoose.connect(`mongodb+srv://mern-mustafa1:mernmustafa1@cluster0.kn0oc.mongodb.net/places?retryWrites=true&w=majority`)
+.then(() => {
+    app.listen(port, () => {
+        console.log(`Server is up on port ${port}`)
+      })
+})
+.catch((err) => {
+    console.log(err)
 })
