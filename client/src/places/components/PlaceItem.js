@@ -5,28 +5,40 @@ import Card from '../../shared/components/UIElements/Card';
 import Button from '../../shared/components/FormElements/Button';
 import Modal from '../../shared/components/UIElements/Modal';
 import { AuthContext } from '../../shared/context/auth-context';
+import { useHttpClient } from '../../shared/hooks/http-hook';
+import ErrorModal from '../../shared/components/UIElements/ErrorModal';
+import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner';
 
 const PlaceItem = (props) => {
+    const { isLoading, error, sendRequest, clearError } = useHttpClient();
     const authCtx = useContext(AuthContext);
-
     const [showMap, setShowMap] = useState(false);
     const [showConfirmModal, setShowConfirmModal] = useState(false);
 
     const mapHandler = () => {
-        setShowMap(!showMap)
+        setShowMap(!showMap);
     }
 
     const deleteWarningHandler = () => {
         setShowConfirmModal(!showConfirmModal);
     }
 
-    const confirmDeleteHandler = () => {
-        console.log('DELETING...');
-        setShowConfirmModal(false)
+    const confirmDeleteHandler = async () => {
+        setShowConfirmModal(false);
+        try {
+            await sendRequest(
+                `http://localhost:5000/api/places/${props.id}`,
+                'DELETE'
+            );
+            props.onDelete(props.id)
+        } catch (error) {
+            
+        }
     }
 
     return (
         <>
+            <ErrorModal error={error} onClear={clearError} />
             <Modal 
                 show={showMap} 
                 onCancel={mapHandler} 
@@ -69,6 +81,7 @@ const PlaceItem = (props) => {
 
             <li className={styles['place-item']}>
                 <Card className={styles['place-item__content']}>
+                    {isLoading && <LoadingSpinner asOverlay />}
                     <div className={styles['place-item__image']}>
                         <img src={props.image} alt={props.title} />
                     </div>
@@ -81,8 +94,8 @@ const PlaceItem = (props) => {
 
                     <div className={styles['place-item__actions']}>
                         <Button inverse onClick={mapHandler}>VIEW ON MAP</Button>
-                        { authCtx.isLoggedIn && <Button to={`/places/${props.id}`}>EDIT</Button> }
-                        { authCtx.isLoggedIn && <Button danger onClick={deleteWarningHandler}>DELETE</Button> }
+                        { authCtx.userId === props.creatorId && <Button to={`/places/${props.id}`}>EDIT</Button> }
+                        { authCtx.userId === props.creatorId && <Button danger onClick={deleteWarningHandler}>DELETE</Button> }
                     </div>
                 </Card>
             </li>

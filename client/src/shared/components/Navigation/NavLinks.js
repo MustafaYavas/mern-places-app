@@ -18,7 +18,7 @@ const NavLinks = () => {
             {
                 authCtx.isLoggedIn &&
                 <li>
-                    <NavLink to='/u1/places' className={({ isActive }) => isActive ? `${styles.active}` : ''}>
+                    <NavLink to={`/${authCtx.userId}/places`} className={({ isActive }) => isActive ? `${styles.active}` : ''}>
                         My Places
                     </NavLink>
                 </li>
