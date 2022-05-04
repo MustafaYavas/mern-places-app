@@ -39,7 +39,7 @@ const signup = async (req, res, next) => {
     const createdUser = new User({
         name,
         email,
-        image: 'https://cdn.iconscout.com/icon/free/png-256/profile-287-460516.png',
+        image: req.file.path,
         password,
         places: []
     })

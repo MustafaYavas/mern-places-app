@@ -2,6 +2,7 @@ import express from 'express';
 import { check } from 'express-validator';
 
 import { getPlaceById, getPlacesByUserId, createPlace, updatePlace, deletePlace } from '../controllers/places-controllers.js';
+import fileUpload from '../middleware/file-upload.js';
 
 // Use the express.Router class to create modular, mountable route handlers
 const router = express.Router();
@@ -12,6 +13,7 @@ router.get('/:pid', getPlaceById);
 router.get('/user/:uid', getPlacesByUserId);
 router.post(
     '/', 
+    fileUpload.single('image'),
     [
         check('title').not().isEmpty(),
         check('description').isLength({min: 5}),
