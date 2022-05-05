@@ -13,7 +13,7 @@ import ErrorModal from '../../shared/components/UIElements/ErrorModal';
 import { AuthContext } from '../../shared/context/auth-context';
 
 
-const UpdatePlace = (props) => {
+const UpdatePlace = () => {
     const { isLoading, error, sendRequest, clearError } = useHttpClient();
     const [loadedPlace, setLoadedPlace] = useState();
     const placeId = useParams().placeId;
@@ -63,7 +63,10 @@ const UpdatePlace = (props) => {
                     title: formState.inputs.title.value,
                     description: formState.inputs.description.value
                 }),
-                { 'Content-Type': 'application/json' }
+                { 
+                    'Content-Type': 'application/json',
+                    Authorization: 'Bearer ' + authCtx.token 
+                }
             )
             navigate(`/${authCtx.userId}/places`)
         } catch (err) {}

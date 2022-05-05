@@ -65,7 +65,7 @@ const Auth = () => {
                     }),
                     { 'Content-Type': 'application/json' }
                 )  
-                authCtx.login(responseData.user.id);
+                authCtx.login(responseData.userId, responseData.token);
             } catch (err) {}
                           
         } else {
@@ -81,7 +81,7 @@ const Auth = () => {
                     formData
                 )
                 
-                authCtx.login(responseData.user.id);
+                authCtx.login(responseData.userId, responseData.token);
             } catch (err) {}
         }
     }
