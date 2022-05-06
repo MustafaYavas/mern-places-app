@@ -1,8 +1,9 @@
-const API_KEY = 'pk.eyJ1IjoibXVzdGFmYXlhdmFzMSIsImEiOiJjbDJhbjRzbWQwMTcyM2VvYmo0dDhpZWQ1In0.xFg3ZRb6pptbftXNVGEwRQ';
-
 import axios from 'axios';
+import 'dotenv/config';
+
 import HttpError from '../models/http-error.js';
 
+const API_KEY = process.env.MAPBOX_API_KEY;
 const API_LINK = 'https://api.mapbox.com/geocoding/v5/mapbox.places';
 const PARAM = '&autocomplete=true&fuzzyMatch=false';
 
@@ -23,6 +24,5 @@ const getCoordsForAddress = async (address) => {
         long: coordintes[0]
       };
 }
-
 
 export default getCoordsForAddress;

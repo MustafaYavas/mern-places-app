@@ -2,6 +2,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import fs from 'fs';
 import path from 'path';
+import 'dotenv/config';
 
 import placesRoutes from './routes/places-routes.js';  // it is kind of a middleware, so we can use it with app.use()
 import usersRoutes from './routes/users-routes.js';
@@ -49,7 +50,7 @@ app.use((error, req, res, next) => {
     })
 })
 
-mongoose.connect(`mongodb+srv://mern-mustafa1:mernmustafa1@cluster0.kn0oc.mongodb.net/mern_places?retryWrites=true&w=majority`)
+mongoose.connect(process.env.MONGO_CONNECT_STRING)
 .then(() => {
     app.listen(port, () => {
         console.log(`Server is up on port ${port}`)

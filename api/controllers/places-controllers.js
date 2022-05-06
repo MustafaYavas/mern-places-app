@@ -1,11 +1,11 @@
 import { validationResult } from 'express-validator';
+import mongoose from 'mongoose';
 import fs from 'fs';
 
 import HttpError from '../models/http-error.js';
 import getCoordsForAddress from '../util/location.js';
 import Place from '../models/place.js';
 import User from '../models/user.js';
-import mongoose from 'mongoose';
 
 
 const getPlaceById = async (req, res, next) => {
@@ -149,7 +149,7 @@ const deletePlace = async (req, res, next) => {
         return next(error);
     }
 
-    if(place.creator.toString() !== req.userData.userId) {
+    if(place.creator.id !== req.userData.userId) {
         const error = new HttpError('You are not allowed to delete this place', 401);
         return next(error); 
     }

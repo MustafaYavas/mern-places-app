@@ -1,9 +1,11 @@
 import { validationResult } from 'express-validator';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
+import 'dotenv/config';
 
 import HttpError from '../models/http-error.js';
 import User from '../models/user.js';
+
 
 const getUsers = async (req, res, next) => {
     let users;
@@ -68,7 +70,7 @@ const signup = async (req, res, next) => {
                 userId: createdUser.id, 
                 email: createdUser.email
             }, 
-            'super_secret_do_not_share',
+            process.env.JWT_SIGN_KEY,
             {
                 expiresIn: '1h'
             }
