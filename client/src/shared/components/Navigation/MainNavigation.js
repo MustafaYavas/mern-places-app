@@ -32,7 +32,7 @@ const MainNavigation = (props) => {
                 </button>
                 <h1 className={styles['main-navigation__title']}>
                     <Link to='/'>
-                        YourPlaces
+                        ReactPlaces
                     </Link>
                 </h1>
                 <nav className={styles['main-navigation__header-nav']}>
