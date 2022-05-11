@@ -55,7 +55,7 @@ const PlaceItem = (props) => {
                             title='map' 
                             src={`https://maps.google.com/maps?q=${props.coordinates.lat},${props.coordinates.long}&t=&z=15&ie=UTF8&iwloc=&output=embed`} 
                             width='100%' 
-                            height='350px' 
+                            height='325px' 
                             frameBorder='0' 
                             style={{borderRadius:'.5rem'}} 
                             allowFullScreen={true} 
