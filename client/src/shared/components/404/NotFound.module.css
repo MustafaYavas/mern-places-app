@@ -1,0 +1,46 @@
+/* .img {
+    margin: auto;
+    height: 25rem;
+} */
+
+.container {
+    text-align: center;
+    animation-name: error;
+    animation-duration: 20s;
+}
+
+.container__error-code {
+    display: flex;
+    justify-content: center;
+}
+
+.container__error-code p{
+    margin: auto 2rem;
+    font-size: 4rem;
+    font-weight: bolder;
+    
+}
+
+.container__error-text p{
+    font-size: 2rem;
+}
+
+
+@keyframes error {
+    0% {
+        color: #00FF1B;
+    }
+    25% {
+        color: #FF0000;
+    }
+    50% {
+        color: #FFD800;
+    }
+    75% {
+        color: #FF00F7;
+    }
+    100% {
+        color: #FF7C00;
+    }
+    
+}
