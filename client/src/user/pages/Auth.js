@@ -1,4 +1,5 @@
 import { useState, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import Input from '../../shared/components/FormElements/Input';
 import Card from '../../shared/components/UIElements/Card';
@@ -16,6 +17,7 @@ const Auth = () => {
     const authCtx = useContext(AuthContext);
     const [isLoginMode, setIsLoginMode] = useState(true);
     const { isLoading, error, sendRequest, clearError } = useHttpClient();
+    const navigate = useNavigate();
 
     const [formState, inputHandler, setFormData] = useForm({
         email: {
@@ -64,8 +66,9 @@ const Auth = () => {
                         password: formState.inputs.password.value,
                     }),
                     { 'Content-Type': 'application/json' }
-                )  
+                )
                 authCtx.login(responseData.userId, responseData.token);
+                navigate('/');
             } catch (err) {}
                           
         } else {
@@ -80,8 +83,8 @@ const Auth = () => {
                     'POST',
                     formData
                 )
-                
                 authCtx.login(responseData.userId, responseData.token);
+                navigate('/');
             } catch (err) {}
         }
     }
