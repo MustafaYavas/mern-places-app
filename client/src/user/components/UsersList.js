@@ -1,13 +1,22 @@
+import { useNavigate } from 'react-router-dom';
+
 import UserItem from './UserItem';
 import styles from './UsersList.module.css';
 import Card from '../../shared/components/UIElements/Card';
 
 const UsersList = (props) => {
+    const navigate = useNavigate();
+
+    const createUserHandler = () => {
+        navigate('/auth')
+    }
+
     return (
         <>
             { props.items.length===0 && 
-                <div className='center'>
+                <div className={styles['no-list-container']}>
                     <Card>No users found</Card>
+                    <button onClick={createUserHandler}>Create User</button>
                 </div> 
             }
 

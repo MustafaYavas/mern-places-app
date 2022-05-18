@@ -1,3 +1,26 @@
+.no-list-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.no-list-container button {
+    background-color: #FF0055;
+    padding: 1rem;
+    margin-top: 2rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    color: white;
+    font: inherit;
+    font-size: 1rem;
+}
+
+.no-list-container button:hover {
+  background-color: #ff4382;
+}
+
 .users-list {
     list-style: none;
     margin: 0 auto;
@@ -7,4 +30,4 @@
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-  }
+}
