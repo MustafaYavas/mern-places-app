@@ -1,7 +1,6 @@
 import { validationResult } from 'express-validator';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import 'dotenv/config';
 
 import HttpError from '../models/http-error.js';
 import User from '../models/user.js';
@@ -119,7 +118,7 @@ const login = async (req, res, next) => {
                 userId: existingUser.id, 
                 email: existingUser.email
             }, 
-            'super_secret_do_not_share',
+            process.env.JWT_SIGN_KEY,
             {
                 expiresIn: '1h'
             }

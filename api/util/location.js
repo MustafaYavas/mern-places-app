@@ -1,5 +1,4 @@
 import axios from 'axios';
-import 'dotenv/config';
 
 import HttpError from '../models/http-error.js';
 
