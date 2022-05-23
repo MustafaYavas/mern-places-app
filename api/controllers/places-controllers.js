@@ -30,7 +30,7 @@ const getPlaceById = async (req, res, next) => {
 const getPlacesByUserId = async (req, res, next) => {
     const userId = req.params.uid;
 
-    let places
+    let places;
     try {
         places = await Place.find({ creator: userId });
     } catch (err) {
@@ -42,7 +42,6 @@ const getPlacesByUserId = async (req, res, next) => {
         return next(new HttpError('Could not find places for the provided user id', 404));
     }
 
-    // res.json({places: places.map(place => place.toObject({getters: true}))})
     res.json({places})
 }
 
@@ -52,13 +51,13 @@ const createPlace = async (req, res, next) => {
         return next(new HttpError('Invalid input passed, please check your data', 422));
     }
 
-    const { title, description, address, creator } = req.body;
+    const { title, description, address } = req.body;
 
     let coordinates;
     try {
-        coordinates = await getCoordsForAddress(address)
+        coordinates = await getCoordsForAddress(address);
     } catch (error) {
-        return next(error)
+        return next(error);
     }
     
     const createdPlace = new Place({

@@ -9,13 +9,13 @@ import styles from './UserPlaces.module.css';
 
 const UserPlaces = () => {
     const [loadedPlaces, setLoadedPlaces] = useState();
-    const params = useParams();
     const { isLoading, sendRequest } = useHttpClient();
+    const params = useParams();
 
     useEffect(() => {
         const fetchPlaces = async () => {
             try {
-                const responseData = await sendRequest(`${process.env.REACT_APP_BACKEND_URL}/places/user/${params.userId}`);
+                const responseData = await sendRequest(`http://localhost:5000/api/places/user/${params.userId}`);
                 setLoadedPlaces(responseData.places)
             } catch (err) { }
         }

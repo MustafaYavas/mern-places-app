@@ -27,7 +27,7 @@ const PlaceItem = (props) => {
         setShowConfirmModal(false);
         try {
             await sendRequest(
-                `${process.env.REACT_APP_BACKEND_URL}/places/${props.id}`,
+                `http://localhost:5000/api/places/${props.id}`,
                 'DELETE',
                 null,
                 {
@@ -85,7 +85,7 @@ const PlaceItem = (props) => {
                 <Card className={styles['place-item__content']}>
                     {isLoading && <LoadingSpinner asOverlay />}
                     <div className={styles['place-item__image']}>
-                        <img src={`${process.env_REACT_APP_ASSET_URL}/${props.image}`} alt={props.title} />
+                        <img src={`http://localhost:5000/${props.image}`} alt={props.title} />
                     </div>
 
                     <div className={styles['place-item__info']}>
@@ -104,7 +104,5 @@ const PlaceItem = (props) => {
         </>
     )
 }
-
-
 
 export default PlaceItem;

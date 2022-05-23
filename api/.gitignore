@@ -13,7 +13,7 @@
 
 # misc
 .DS_Store
-nodemon.json
+.env
 
 npm-debug.log*
 yarn-debug.log*
